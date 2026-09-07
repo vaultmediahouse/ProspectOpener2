@@ -1,0 +1,91 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  CUSTOMER
+  ADMIN
+}
+
+enum Status {
+  ACTIVE
+  INACTIVE
+}
+
+model Users {
+  id          String    @id @default(uuid())
+  name        String
+  email       String    @unique
+  google_id   String?   @unique
+  password_hash String?
+  role        Role      @default(CUSTOMER)
+  status      Status    @default(ACTIVE)
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @updatedAt
+  last_login_at DateTime?
+  orders      Orders[]
+  Leads       LeadAssignments[]
+}
+
+model Plans {
+  id            String    @id @default(uuid())
+  name          String
+  lead_quantity Int
+  price         Int
+  currency      String    @default("INR")
+  active        Boolean   @default(true)
+  created_at    DateTime  @default(now())
+
+  orders        Orders[]
+}
+
+model Orders {
+  id             String    @id @default(uuid())
+  user_id        String
+  plan_id        String
+  lead_quantity  Int
+  amount         Int
+  currency       String    @default("INR")
+  payment_status String    @default("PENDING")
+  order_status   String    @default("PROCESSING")
+  created_at     DateTime  @default(now())
+  paid_at        DateTime?
+  provider_order_id String?
+  provider_payment_id String?
+  provider_signature String?
+
+  user          Users      @relation(fields: [user_id], references: [id])
+  plan          Plans      @relation(fields: [plan_id], references: [id])
+}
+
+model LeadAssignments {
+  id          String    @id @default(uuid())
+  user_id     String
+  lead_id     String?
+  created_at  DateTime  @default(now())
+
+  user        Users      @relation(fields: [user_id], references: [id])
+  lead        Leads?     @relation(fields: [lead_id], references: [id])
+}
+
+model Leads {
+  id              String             @id @default(uuid())
+  business_name   String
+  industry        String?
+  country         String?
+  city            String?
+  website         String?
+  business_email  String?
+  phone           String?
+  contact_name    String?
+  source          String?
+  verification   String?
+  created_at      DateTime           @default(now())
+  updated_at      DateTime           @updatedAt
+  assignments     LeadAssignments[]
+}

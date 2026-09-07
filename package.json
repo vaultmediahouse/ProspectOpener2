@@ -1,0 +1,36 @@
+{
+  "name": "prospectopener2",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "db:migrate": "psql -v ON_ERROR_STOP=1 \"$DATABASE_URL\" -f prisma/migrations/20260906000001_init/migration.sql && psql -v ON_ERROR_STOP=1 \"$DATABASE_URL\" -f prisma/migrations/20260906000002_indexes/migration.sql && psql -v ON_ERROR_STOP=1 \"$DATABASE_URL\" -f prisma/migrations/20260906000003_leads/migration.sql && psql -v ON_ERROR_STOP=1 \"$DATABASE_URL\" -f prisma/migrations/20260906000004_plan_constraint/migration.sql",
+    "db:seed": "psql -v ON_ERROR_STOP=1 \"$DATABASE_URL\" -f prisma/seed.sql",
+    "postinstall": "prisma skills sync || exit 0"
+  },
+  "dependencies": {
+    "@prisma/client": "^7.10.0",
+    "bcryptjs": "^3.0.3",
+    "jose": "^6.2.12",
+    "next": "16.3.4",
+    "pg": "^8.23.0",
+    "prisma": "^8.0.0-rc.13",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "zod": "^4.5.4"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/pg": "^8.23.1",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.4",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

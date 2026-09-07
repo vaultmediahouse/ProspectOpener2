@@ -1,0 +1,21 @@
+# Dependencies and build output
+node_modules/
+.next/
+
+# Local environment files and secrets
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Prisma/Composer local state
+.prisma-composer/
+
+# Local tooling and operating-system files
+.DS_Store
+*.log
+coverage/
+
+# Editor files
+.vscode/
+.idea/
