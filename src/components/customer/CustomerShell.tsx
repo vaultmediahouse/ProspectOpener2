@@ -62,7 +62,7 @@ export function CustomerShell({
 
           <div className="customer-user-menu">
             <a
-              href="https://website.com/pricing"
+              href={`${process.env.NEXT_PUBLIC_APP_URL}/pricing`}
               className="button button-small"
               style={{ padding: "8px 14px", fontSize: "11px" }}
             >
@@ -93,9 +93,9 @@ export function CustomerShell({
       <footer className="customer-footer container">
         <span>© 2026 Vault Media House · Verified Lead Marketplace</span>
         <div className="footer-links">
-          <a href="https://website.com/how-it-works">How it works</a>
-          <a href="https://website.com/terms">Terms</a>
-          <a href="https://website.com/privacy">Privacy</a>
+          <a href={`${process.env.NEXT_PUBLIC_APP_URL}/how-it-works`}>How it works</a>
+          <a href={`${process.env.NEXT_PUBLIC_APP_URL}/terms`}>Terms</a>
+          <a href={`${process.env.NEXT_PUBLIC_APP_URL}/privacy`}>Privacy</a>
         </div>
       </footer>
     </div>

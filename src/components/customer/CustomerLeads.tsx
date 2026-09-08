@@ -82,7 +82,7 @@ export function CustomerLeads({
               unique leads directly to your inventory.
             </p>
             <div style={{ marginTop: "24px", display: "flex", gap: "16px" }}>
-              <a href="https://website.com/pricing" className="button">
+              <a href={`${process.env.NEXT_PUBLIC_APP_URL}/pricing`} className="button">
                 Browse Lead Packages ↗
               </a>
               <Link href="/" className="text-link">

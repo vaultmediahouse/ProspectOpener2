@@ -63,7 +63,7 @@ export default async function OrdersPage() {
               </p>
             </div>
             <div className="customer-hero-actions">
-              <a href="https://website.com/pricing" className="button">
+              <a href={`${process.env.NEXT_PUBLIC_APP_URL}/pricing`} className="button">
                 Buy More Leads ↗
               </a>
             </div>

@@ -66,7 +66,7 @@ ipAddress: request.headers.get("x-real-ip") ?? request.headers.get("x-forwarded-
     const worksheet = XLSX.utils.json_to_sheet(leads);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Leads");
-    const buffer = XLSX.write(workbook, { type: "buffer", bookType: "xlsx" }) as Buffer;
+    const xlsxBuffer = XLSX.write(workbook, { type: "array", bookType: "xlsx" }) as ArrayBuffer;
 
     await logActivity({
       actorType: "CUSTOMER",
@@ -79,7 +79,7 @@ ipAddress: request.headers.get("x-real-ip") ?? request.headers.get("x-forwarded-
       userAgent: request.headers.get("user-agent"),
     });
 
-    return new Response(buffer, {
+    return new Response(xlsxBuffer, {
       status: 200,
       headers: {
         "Content-Type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",

@@ -62,10 +62,10 @@ export async function CustomerHome() {
               outreach. No recurring subscriptions or commitments.
             </p>
             <div style={{ marginTop: "24px", display: "flex", gap: "16px" }}>
-              <a href="https://website.com/pricing" className="button">
+              <a href={`${process.env.NEXT_PUBLIC_APP_URL}/pricing`} className="button">
                 Browse Lead Packages ↗
               </a>
-              <a href="https://website.com/how-it-works" className="text-link">
+              <a href={`${process.env.NEXT_PUBLIC_APP_URL}/how-it-works`} className="text-link">
                 Learn how it works ↗
               </a>
             </div>
