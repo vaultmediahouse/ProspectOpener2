@@ -93,7 +93,7 @@ export function CustomerSettings({ profile }: { profile: CustomerProfile }) {
         </label>
         <div style={{ marginTop: "18px" }}>
           <button
-            onClick={() => void saveProfile(}
+            onClick={() => void saveProfile()}
             disabled={loading}
             className="button button-small"
             style={{ padding: "8px 15px" }}
@@ -139,7 +139,7 @@ export function CustomerSettings({ profile }: { profile: CustomerProfile }) {
               />
             </label>
             <button
-              onClick={() => void changePassword(}
+              onClick={() => void changePassword()}
               disabled={loading || !newPassword}
               className="button button-small"
               style={{ padding: "8px 15px" }}
@@ -164,7 +164,7 @@ export function CustomerSettings({ profile }: { profile: CustomerProfile }) {
               />
             </label>
             <button
-              onClick={() => void changePassword(}
+              onClick={() => void changePassword()}
               disabled={loading || !newPassword}
               className="button button-small"
               style={{ padding: "8px 15px" }}
