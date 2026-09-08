@@ -1,0 +1,6 @@
+import Link from "next/link";
+import { AdminShell } from "./AdminShell";
+
+export function AdminLeads({ leads, summary }: { leads: Array<{ id: string; business_name: string; city: string | null; country: string | null; industry: string | null; source: string | null; status: string; import_batch_id: string | null }>; summary: { total: number; available: number; assigned: number } }) {
+  return <AdminShell title="Lead inventory"><div className="admin-panel"><div className="panel-head"><h3>Inventory</h3><Link href="/imports">Import CSV →</Link></div><div className="admin-grid"><article className="kpi-card"><span>Total</span><strong>{summary.total}</strong></article><article className="kpi-card"><span>Available</span><strong>{summary.available}</strong></article><article className="kpi-card"><span>Assigned</span><strong>{summary.assigned}</strong></article></div><div className="admin-table-wrap"><table className="admin-table"><thead><tr><th>Lead</th><th>City</th><th>Country</th><th>Industry</th><th>Source</th><th>Status</th></tr></thead><tbody>{leads.map((lead) => <tr key={lead.id}><td><Link href={`/leads/${lead.id}`}>{lead.business_name}</Link></td><td>{lead.city ?? "-"}</td><td>{lead.country ?? "-"}</td><td>{lead.industry ?? "-"}</td><td>{lead.source ?? "-"}</td><td>{lead.status}</td></tr>)}</tbody></table></div></div></AdminShell>;
+}

@@ -1,7 +1,9 @@
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import { query } from "@/lib/db";
+import { isAdminEmail } from "@/lib/admin";
 import { setSession } from "@/lib/session";
+import { logActivity } from "@/lib/activity";
 
 type GoogleToken = { access_token: string };
 type GoogleProfile = { sub: string; name: string; email: string };
@@ -18,8 +20,11 @@ export async function GET(request: Request) {
   const profileResponse = await fetch("https://openidconnect.googleapis.com/v1/userinfo", { headers: { Authorization: `Bearer ${token.access_token}` } });
   if (!profileResponse.ok) redirect("/login?error=google_failed");
   const profile = await profileResponse.json() as GoogleProfile;
-  const result = await query<{ id: string; name: string; email: string; role: "CUSTOMER" | "ADMIN" }>(`INSERT INTO "Users" (name, email, google_id, last_login_at) VALUES ($1, $2, $3, NOW()) ON CONFLICT (email) DO UPDATE SET name = EXCLUDED.name, google_id = EXCLUDED.google_id, last_login_at = NOW() RETURNING id, name, email, role`, [profile.name, profile.email.toLowerCase(), profile.sub]);
+  const email = profile.email.toLowerCase();
+  const role = isAdminEmail(email) ? "ADMIN" : "CUSTOMER";
+  const result = await query<{ id: string; name: string; email: string; role: "CUSTOMER" | "ADMIN" }>(`INSERT INTO "Users" (name, email, google_id, last_login_at, role) VALUES ($1, $2, $3, NOW(), $4) ON CONFLICT (email) DO UPDATE SET name = EXCLUDED.name, google_id = EXCLUDED.google_id, last_login_at = NOW(), role = EXCLUDED.role RETURNING id, name, email, role`, [profile.name, email, profile.sub, role]);
   const user = result.rows[0];
   await setSession({ userId: user.id, name: user.name, email: user.email, role: user.role });
+  await logActivity({ actorType: user.role, actorId: user.id, action: "login", targetType: "Users", targetId: user.id, metadata: { provider: "google", email: user.email } });
   redirect("/checkout");
 }

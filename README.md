@@ -15,6 +15,8 @@ Razorpay checkout requires `RAZORPAY_KEY_ID`, `RAZORPAY_KEY_SECRET`, and `RAZORP
 
 Set `NEXT_PUBLIC_APP_URL` to the public website URL and `CUSTOMER_APP_URL` / `NEXT_PUBLIC_CUSTOMER_APP_URL` to the future customer application URL.
 
+Set `ADMIN_EMAIL` to the email address that should be treated as the first admin account. Anyone signing in with that email will be elevated server-side to `ADMIN`; regular customer registration never exposes an admin role picker.
+
 ## Validation
 
 - `npm run lint`

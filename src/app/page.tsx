@@ -1,4 +1,8 @@
 import Link from "next/link";
+import { headers } from "next/headers";
+import { isAdminHost, isCustomerHost } from "@/lib/host";
+import { AdminHome } from "@/components/admin/AdminHome";
+import { CustomerHome } from "@/components/customer/CustomerHome";
 
 const Arrow = () => <span aria-hidden="true">↗</span>;
 
@@ -13,7 +17,10 @@ function Logo() {
 
 const fields = ["Business name", "Industry & location", "Website", "Business email", "Phone, when available", "Contact name, when available"];
 
-export default function Home() {
+export default async function Home() {
+  const host = (await headers()).get("host");
+  if (isAdminHost(host)) return <AdminHome />;
+  if (isCustomerHost(host)) return <CustomerHome />;
   return (
     <main>
       <div className="announcement"><span>NEW</span> The smarter way to build your outreach pipeline <Arrow /></div>

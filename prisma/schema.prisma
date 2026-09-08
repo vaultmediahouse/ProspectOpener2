@@ -53,11 +53,13 @@ model Orders {
   currency       String    @default("INR")
   payment_status String    @default("PENDING")
   order_status   String    @default("PROCESSING")
+  allocation_status String @default("PENDING")
   created_at     DateTime  @default(now())
   paid_at        DateTime?
   provider_order_id String?
   provider_payment_id String?
   provider_signature String?
+  allocated_at   DateTime?
 
   user          Users      @relation(fields: [user_id], references: [id])
   plan          Plans      @relation(fields: [plan_id], references: [id])
@@ -66,10 +68,16 @@ model Orders {
 model LeadAssignments {
   id          String    @id @default(uuid())
   user_id     String
-  lead_id     String?
+  customer_id String?
+  order_id    String?
+  lead_id     String?   @unique
+  status      String    @default("ASSIGNED")
+  assigned_at DateTime  @default(now())
   created_at  DateTime  @default(now())
 
   user        Users      @relation(fields: [user_id], references: [id])
+  customer    Users?     @relation(fields: [customer_id], references: [id])
+  order       Orders?    @relation(fields: [order_id], references: [id])
   lead        Leads?     @relation(fields: [lead_id], references: [id])
 }
 
@@ -85,7 +93,58 @@ model Leads {
   contact_name    String?
   source          String?
   verification   String?
+  status         String             @default("AVAILABLE")
+  import_batch_id String?
+  dedupe_key      String?            @unique
   created_at      DateTime           @default(now())
   updated_at      DateTime           @updatedAt
   assignments     LeadAssignments[]
+}
+
+model Imports {
+  id            String    @id @default(uuid())
+  filename      String
+  total_rows    Int       @default(0)
+  valid_rows    Int       @default(0)
+  duplicate_rows Int      @default(0)
+  invalid_rows  Int       @default(0)
+  status        String    @default("PENDING")
+  created_by    String?
+  created_at    DateTime  @default(now())
+  confirmed_at  DateTime?
+}
+
+model ImportErrors {
+  id          String   @id @default(uuid())
+  import_id   String
+  row_number  Int
+  reason      String
+  row_data    String?
+  created_at  DateTime @default(now())
+}
+
+model Payments {
+  id                String   @id @default(uuid())
+  order_id          String
+  provider          String
+  provider_order_id String?
+  provider_payment_id String?
+  status            String
+  amount            Int
+  currency          String
+  raw_payload       String?
+  created_at        DateTime @default(now())
+}
+
+model ActivityLogs {
+  id          String   @id @default(uuid())
+  actor_type  String
+  actor_id    String?
+  action      String
+  target_type String?
+  target_id   String?
+  metadata    String?
+  ip_address  String?
+  user_agent  String?
+  created_at  DateTime @default(now())
 }

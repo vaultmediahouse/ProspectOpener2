@@ -4,9 +4,9 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
-export default function LoginForm() {
+export default function LoginForm({ defaultNext = "/checkout" }: { defaultNext?: string }) {
   const router = useRouter();
-  const next = useSearchParams().get("next") ?? "/checkout";
+  const next = useSearchParams().get("next") ?? defaultNext;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");

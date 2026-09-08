@@ -9,3 +9,46 @@
 
 .legal-copy{max-width:800px;padding-top:65px;padding-bottom:130px;margin-left:calc((100vw - 1200px)/2);margin-right:auto}.legal-copy h2{font-size:24px;font-weight:500;margin:35px 0 10px}.legal-copy h2:first-child{margin-top:0}.legal-copy p{font-size:14px;line-height:1.8;color:var(--muted);max-width:680px}
 .form-error{background:#f8e8e5;color:#96584e;padding:11px 13px;font-size:11px;line-height:1.5}
+.admin-shell{min-height:100vh;display:grid;grid-template-columns:280px 1fr;background:#f4f6f2}.admin-sidebar{padding:30px 24px;border-right:1px solid var(--line);background:#f9faf7;display:flex;flex-direction:column;justify-content:space-between;gap:30px}.admin-sidebar h1{font-size:36px;line-height:1.02;letter-spacing:-.05em;font-weight:500;margin:14px 0 0}.admin-nav{display:flex;flex-direction:column;gap:12px}.admin-nav a{padding:10px 12px;border:1px solid var(--line);background:#fff;font-size:12px;font-weight:700}.admin-content{padding:30px}.admin-hero{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:22px}.admin-hero h2{font-size:42px;line-height:1;letter-spacing:-.05em;font-weight:500;margin:14px 0 10px}.admin-hero p{color:var(--muted);margin:0}.warning-card{padding:14px 16px;background:#fff3cd;border:1px solid #f1d06d;color:#7a5b00;font-size:12px}.admin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}.kpi-card,.admin-panel{background:#fff;border:1px solid var(--line);padding:18px}.kpi-card span{font-size:10px;letter-spacing:.12em;color:#7d877d;text-transform:uppercase}.kpi-card strong{display:block;font-size:34px;letter-spacing:-.05em;margin:12px 0 4px}.kpi-card small{color:var(--muted);font-size:11px}.admin-panel{margin-bottom:18px}.panel-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.panel-head h3{margin:0;font-size:18px}.admin-table-wrap{overflow:auto}.admin-table{width:100%;border-collapse:collapse;font-size:12px}.admin-table th,.admin-table td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.plan-breakdown{display:grid;gap:10px}.plan-row{display:flex;justify-content:space-between;align-items:center;padding:12px;border:1px solid var(--line);background:#fafbf8}.plan-row b{display:block}.plan-row small,.plan-row span{color:var(--muted);font-size:11px}.plan-row strong{display:block;font-size:20px;letter-spacing:-.03em}.settings-list,.detail-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.settings-list{padding-left:18px}.detail-grid dt{font-size:10px;letter-spacing:.12em;color:#7b867d;text-transform:uppercase}.detail-grid dd{margin:4px 0 0;font-weight:700}
+@media(max-width:800px){.admin-shell{grid-template-columns:1fr}.admin-sidebar{border-right:0;border-bottom:1px solid var(--line)}.admin-grid{grid-template-columns:1fr}.admin-hero{flex-direction:column}.settings-list,.detail-grid{grid-template-columns:1fr}}
+
+/* Customer Application Styles */
+.customer-app{min-height:100vh;display:flex;flex-direction:column;background:var(--paper)}
+.customer-header{border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:40}
+.customer-header-inner{display:flex;align-items:center;justify-content:space-between;height:74px}
+.customer-nav{display:flex;gap:24px;font-size:12px;font-weight:700}
+.customer-nav-link{color:var(--muted);padding:8px 0;transition:color .2s;position:relative}
+.customer-nav-link:hover{color:var(--forest)}
+.customer-nav-link.active{color:var(--forest);border-bottom:2px solid var(--forest)}
+.customer-user-menu{display:flex;align-items:center;gap:18px}
+.customer-user-pill{display:flex;align-items:center;gap:10px;background:#f5f7f2;padding:6px 12px;border:1px solid var(--line);border-radius:20px}
+.customer-avatar{width:24px;height:24px;border-radius:50%;background:var(--forest);color:#fff;display:grid;place-items:center;font-size:10px;font-weight:bold}
+.customer-user-info strong{display:block;font-size:11px;line-height:1}
+.customer-user-info small{display:block;font-size:9px;color:var(--muted);margin-top:2px}
+.customer-main{flex:1;padding-top:40px;padding-bottom:70px}
+.customer-hero{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:35px;gap:20px}
+.customer-hero h1{font-size:clamp(36px,5vw,52px);line-height:1.02;letter-spacing:-.05em;font-weight:500;margin:12px 0 8px}
+.customer-hero p{color:var(--muted);font-size:14px;margin:0}
+.customer-hero-actions{display:flex;gap:12px}
+.customer-kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:30px}
+.customer-card{background:#fff;border:1px solid var(--line);padding:28px;position:relative}
+.customer-card.featured{background:var(--forest);color:#fff}
+.customer-card-label{font-size:10px;letter-spacing:.12em;color:var(--muted);font-weight:700;display:block}
+.customer-card.featured .customer-card-label{color:#b3c4b5}
+.customer-plan-name{font-size:32px;letter-spacing:-.05em;margin:16px 0 4px;font-weight:600}
+.customer-plan-details{font-size:14px;color:var(--forest);display:flex;gap:8px;align-items:center;font-weight:500}
+.customer-plan-sub{display:block;font-size:10px;color:var(--muted);margin-top:14px}
+.customer-huge-number{font-size:62px;line-height:1;letter-spacing:-.07em;margin:12px 0;display:block;color:var(--lime)}
+.customer-empty-panel{background:#fff;border:1px solid var(--line);padding:48px 36px;margin-bottom:30px}
+.customer-empty-panel h2{font-size:36px;letter-spacing:-.05em;margin:16px 0 8px;font-weight:500}
+.customer-empty-panel p{color:var(--muted);max-width:540px;font-size:14px;line-height:1.6;margin:0}
+.customer-panel{background:#fff;border:1px solid var(--line);padding:28px;margin-bottom:24px}
+.customer-footer{min-height:75px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;font-size:10px;color:var(--muted);margin-top:auto}
+
+@media(max-width:800px){
+  .customer-header-inner{height:auto;padding-top:16px;padding-bottom:16px;flex-direction:column;gap:14px}
+  .customer-nav{gap:16px;font-size:11px}
+  .customer-hero{flex-direction:column;align-items:flex-start}
+  .customer-kpi-grid{grid-template-columns:1fr}
+  .customer-footer{flex-direction:column;gap:12px;padding-top:20px;padding-bottom:20px}
+}
